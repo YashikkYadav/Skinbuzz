@@ -985,7 +985,16 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
+
+    <style>
+      @media (max-width: 768px) {
+        .floating-reviews {
+          display: none !important;
+        }
+      }
+    </style>
     <div
+      class="floating-reviews"
       style="
         position: fixed;
         left: 15px;
@@ -2706,6 +2715,11 @@
                       .footer-about a,
                       .footer-contact a {
                         pointer-events: auto !important;
+                      }
+                      @media (max-width: 768px) {
+                        .footer-col {
+                          margin-left: 0 !important;
+                        }
                       }
                     </style>
 

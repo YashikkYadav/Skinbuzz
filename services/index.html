@@ -907,7 +907,16 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
+
+    <style>
+      @media (max-width: 768px) {
+        .floating-reviews {
+          display: none !important;
+        }
+      }
+    </style>
     <div
+      class="floating-reviews"
       style="
         position: fixed;
         left: 15px;
@@ -1700,7 +1709,7 @@
                                     class="mkdf-elements-holder mkdf-three-columns mkdf-responsive-mode-1024"
                                   >
                                     <div
-                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottom"
+                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottomm"
                                       data-item-class="mkdf-eh-custom-7883"
                                       data-animation="mkdf-element-from-bottom"
                                       data-animation-delay="0ms"
@@ -1778,7 +1787,7 @@
                                       </div>
                                     </div>
                                     <div
-                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottom"
+                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottomm"
                                       data-item-class="mkdf-eh-custom-1420"
                                       data-animation="mkdf-element-from-bottom"
                                       data-animation-delay="150ms"
@@ -1858,7 +1867,7 @@
                                       </div>
                                     </div>
                                     <div
-                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottom"
+                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottomm"
                                       data-item-class="mkdf-eh-custom-2250"
                                       data-animation="mkdf-element-from-bottom"
                                       data-animation-delay="300ms"
@@ -1960,7 +1969,7 @@
                                     class="mkdf-elements-holder mkdf-three-columns mkdf-responsive-mode-1024"
                                   >
                                     <div
-                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottom"
+                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottomm"
                                       data-item-class="mkdf-eh-custom-1675"
                                       data-animation="mkdf-element-from-bottom"
                                       data-animation-delay="0ms"
@@ -2039,7 +2048,7 @@
                                       </div>
                                     </div>
                                     <div
-                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottom"
+                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottomm"
                                       data-item-class="mkdf-eh-custom-9510"
                                       data-animation="mkdf-element-from-bottom"
                                       data-animation-delay="150ms"
@@ -2117,7 +2126,7 @@
                                       </div>
                                     </div>
                                     <div
-                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottom"
+                                      class="mkdf-eh-item mkdf-horizontal-alignment-center mkdf-element-from-bottomm"
                                       data-item-class="mkdf-eh-custom-5521"
                                       data-animation="mkdf-element-from-bottom"
                                       data-animation-delay="300ms"
@@ -2387,6 +2396,12 @@
                       .footer-about a,
                       .footer-contact a {
                         pointer-events: auto !important;
+                      }
+
+                      @media (max-width: 768px) {
+                        .footer-col {
+                          margin-left: 0 !important;
+                        }
                       }
                     </style>
 

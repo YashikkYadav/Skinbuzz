@@ -282,7 +282,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   rel="stylesheet" 
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 />
-	<div style="position: fixed; left: 15px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 9999; font-family: 'Poppins', sans-serif;">
+
+
+<style>
+      @media (max-width: 768px) {
+        .floating-reviews {
+          display: none !important;
+        }
+      }
+    </style>
+	<div class="floating-reviews" style="position: fixed; left: 15px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 9999; font-family: 'Poppins', sans-serif;">
 
   <!-- Google Reviews -->
   <div style="background: #fff; width: 70px; padding: 15px 10px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center;">
@@ -1020,6 +1029,11 @@ E-mail: <a href=""><span class="__cf_email__" data-cfemail="40292e262f002538212d
 .footer-contact a {
   pointer-events: auto !important;
 }
+ @media (max-width: 768px) {
+                        .footer-col {
+                          margin-left: 0 !important;
+                        }
+                      }
 				</style>
 
 
