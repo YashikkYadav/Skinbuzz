@@ -1763,6 +1763,278 @@
               </div>
             </section>
 
+            <!-- Tattoo Popup Section  -->
+            <section id="tattoo-popup-section">
+              <!-- Overlay -->
+              <div class="overlay" id="popupOverlay">
+                <div class="popup">
+                  <div class="close-btn" onclick="closePopup()">✕</div>
+
+                  <!-- Left Image -->
+                  <div class="popup-left">
+                    <img
+                      src="/wp-content/uploads/2018/05/port-4-img-12.jpg"
+                      alt="Tattoo Studio"
+                    />
+                  </div>
+
+                  <!-- Right Content -->
+                  <div class="popup-right">
+                    <div class="offer-banner">
+                      <span class="offer-badge">LIMITED</span>
+                      <span class="offer-text"
+                        >Get <strong>30% OFF</strong> on your first
+                        session</span
+                      >
+                    </div>
+
+                    <h2>Book Your Appointment</h2>
+                    <p>Select a service and fill in your details</p>
+
+                    <!-- Tabs -->
+                    <div class="tabs">
+                      <button
+                        class="tab active"
+                        onclick="selectService('Tattoo', this)"
+                      >
+                        Tattoo
+                      </button>
+                      <button
+                        class="tab"
+                        onclick="selectService('Piercing', this)"
+                      >
+                        Piercing
+                      </button>
+                      <button
+                        class="tab"
+                        onclick="selectService('Tattoo Training', this)"
+                      >
+                        Tattoo Training
+                      </button>
+                    </div>
+
+                    <!-- Form -->
+                    <form onsubmit="handleSubmit(event)">
+                      <div class="form-group">
+                        <input type="text" placeholder="Your Name" required />
+                      </div>
+
+                      <div class="form-group">
+                        <input type="tel" placeholder="Phone Number" required />
+                      </div>
+
+                      <input type="hidden" id="serviceInput" value="Tattoo" />
+
+                      <button class="submit-btn">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <style>
+                .offer-banner {
+                  width: 90%;
+                  padding: 12px 14px;
+                  margin-bottom: 20px;
+                  margin-top: 20px;
+
+                  border: 1px solid #000;
+                  background: #000;
+                  color: #fff;
+
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+
+                  font-size: 14px;
+                }
+
+                .offer-badge {
+                  background: #fff;
+                  color: #000;
+                  padding: 4px 8px;
+                  font-size: 11px;
+                  font-weight: bold;
+                  letter-spacing: 0.5px;
+                }
+
+                .offer-text strong {
+                  font-weight: 700;
+                }
+
+                /* Overlay */
+                .overlay {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100vw;
+                  height: 100vh;
+
+                  background: rgba(0, 0, 0, 0.6);
+
+                  display: none; /* ✅ HIDDEN BY DEFAULT */
+                  align-items: center;
+                  justify-content: center;
+
+                  z-index: 9999;
+                }
+
+                /* Popup */
+                .popup {
+                  width: 90%;
+                  max-width: 900px;
+                  background: #fff;
+                  display: flex;
+                  border-radius: 10px;
+                  overflow: hidden;
+                  position: relative;
+                }
+
+                /* Close button */
+                .close-btn {
+                  position: absolute;
+                  top: 10px;
+                  right: 14px;
+                  font-size: 22px;
+                  cursor: pointer;
+                  color: #000;
+                }
+
+                /* Left Image */
+                .popup-left {
+                  width: 50%;
+                  overflow: hidden;
+                }
+
+                .popup-left img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                }
+
+                /* Right Content */
+                .popup-right {
+                  width: 50%;
+                  padding: 30px;
+                }
+
+                .popup-right h2 {
+                  margin: 0 0 10px;
+                  font-size: 26px;
+                }
+
+                .popup-right p {
+                  margin-bottom: 20px;
+                  color: #555;
+                  font-size: 14px;
+                }
+
+                /* Tabs */
+                .tabs {
+                  display: flex;
+                  gap: 10px;
+                  margin-bottom: 20px;
+                }
+
+                .tab {
+                  flex: 1;
+                  padding: 10px;
+                  border: 1px solid #000;
+                  background: #fff;
+                  cursor: pointer;
+                  font-size: 14px;
+                }
+
+                .tab.active {
+                  background: #000;
+                  color: #fff;
+                }
+
+                /* Form */
+                .form-group {
+                  margin-bottom: 15px;
+                }
+
+                .form-group input {
+                  width: 100%;
+                  padding: 12px;
+                  border: 1px solid #000;
+                  font-size: 14px;
+                }
+
+                .submit-btn {
+                  width: 100%;
+                  padding: 12px;
+                  background: #000;
+                  color: #fff;
+                  border: none;
+                  cursor: pointer;
+                }
+
+                /* Responsive */
+                @media (max-width: 768px) {
+                  .popup {
+                    flex-direction: column;
+                  }
+
+                  .popup-left,
+                  .popup-right {
+                    width: 100%;
+                  }
+
+                  .popup-left {
+                    height: 200px;
+                  }
+                }
+              </style>
+
+              <script>
+                let popup;
+
+                window.addEventListener("DOMContentLoaded", () => {
+                  popup = document.getElementById("popupOverlay");
+
+                  const isClosed = sessionStorage.getItem("popupClosed");
+
+                  // Show popup ONLY if not closed in this session
+                  if (!isClosed) {
+                    popup.style.display = "flex";
+                  }
+                });
+
+                function closePopup() {
+                  sessionStorage.setItem("popupClosed", "true");
+                  popup.style.display = "none";
+                }
+
+                function openPopup() {
+                  sessionStorage.removeItem("popupClosed");
+                  popup.style.display = "flex";
+                }
+
+                function selectService(service, element) {
+                  document.getElementById("serviceInput").value = service;
+
+                  document.querySelectorAll(".tab").forEach((tab) => {
+                    tab.classList.remove("active");
+                  });
+
+                  element.classList.add("active");
+                }
+
+                function handleSubmit(e) {
+                  e.preventDefault();
+
+                  sessionStorage.setItem("popupClosed", "true");
+                  popup.style.display = "none";
+
+                  alert("Form submitted successfully");
+                }
+              </script>
+            </section>
+
+            <!-- Popup Overlay -->
+
             <link
               rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -2857,7 +3129,9 @@
                         <div class="footer-col">
                           <h4 class="footer-title">Important Links</h4>
                           <ul class="footer-links">
-                            <li><a href="../contact">Tattoo Pricing</a></li>
+                            <li>
+                              <a href="/about/#pricing">Tattoo Pricing</a>
+                            </li>
                             <li><a href="/#aftercare">Tattoo Aftercare</a></li>
                             <li>
                               <a href="../contact/#booking">Book Appointment</a>
