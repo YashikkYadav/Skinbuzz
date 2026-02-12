@@ -952,6 +952,491 @@
     itemscope
     itemtype="http://schema.org/WebPage"
   >
+    <!-- Tattoo Popup Section  -->
+    <section id="tattoo-popup-section">
+      <!-- Overlay -->
+      <div class="overlay" id="popupOverlay">
+        <div class="popup">
+          <div class="close-btn" onclick="closePopup()">✕</div>
+
+          <!-- Left Image -->
+          <div class="popup-left">
+            <img
+              src="/wp-content/uploads/2018/05/port-4-img-12.jpg"
+              alt="Tattoo Studio"
+            />
+          </div>
+
+          <!-- Right Content -->
+          <div class="popup-right">
+            <div class="offer-banner">
+              <span class="offer-badge">LIMITED</span>
+              <span class="offer-text"
+                >Get <strong>30% OFF</strong> first session</span
+              >
+            </div>
+
+            <h2>Book Appointment</h2>
+            <p>Select a service and fill in your details</p>
+
+            <!-- Tabs -->
+            <div class="tabs">
+              <button
+                type="button"
+                class="tab active"
+                onclick="selectService('Tattoo', this)"
+              >
+                Tattoo
+              </button>
+              <button
+                type="button"
+                class="tab"
+                onclick="selectService('Piercing', this)"
+              >
+                Piercing
+              </button>
+              <button
+                type="button"
+                class="tab"
+                onclick="selectService('Training', this)"
+              >
+                Training
+              </button>
+            </div>
+
+            <!-- Form -->
+            <form onsubmit="handleSubmit(event)">
+              <div class="form-group">
+                <input type="text" placeholder="Your Name" required />
+              </div>
+
+              <div class="form-group">
+                <input type="tel" placeholder="Phone Number" required />
+              </div>
+
+              <input type="hidden" id="serviceInput" value="Tattoo" />
+
+              <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        /* Reset & Base */
+        #tattoo-popup-section * {
+          box-sizing: border-box;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        /* Overlay - Handles positioning and scrolling */
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.7);
+          backdrop-filter: blur(3px); /* Modern blur effect */
+          z-index: 9999;
+
+          /* Flex centering */
+          display: none; /* Hidden by default */
+          align-items: center;
+          justify-content: center;
+
+          /* Scroll handling for small screens */
+          overflow-y: auto;
+          padding: 20px;
+        }
+
+        /* Popup Container */
+        .popup {
+          background: #fff;
+          width: 100%;
+          max-width: 850px;
+          display: flex;
+          border-radius: 8px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+          position: relative;
+          overflow: hidden;
+          margin: auto; /* Centers within overlay if scrolling is needed */
+        }
+
+        /* Close Button */
+        .close-btn {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          width: 30px;
+          height: 30px;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          z-index: 10;
+          transition: background 0.2s;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn:hover {
+          background: #f0f0f0;
+        }
+
+        /* Left Section (Image) */
+        .popup-left {
+          width: 45%;
+          position: relative;
+        }
+
+        .popup-left img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        /* Right Section (Content) */
+        .popup-right {
+          width: 55%;
+          padding: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        /* Offer Banner */
+        .offer-banner {
+          border: 1px solid #000;
+          background: #000;
+          color: #fff;
+          padding: 10px 12px;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 13px;
+          border-radius: 4px;
+        }
+
+        .offer-badge {
+          background: #fff;
+          color: #000;
+          padding: 3px 6px;
+          font-size: 10px;
+          font-weight: 800;
+          border-radius: 2px;
+          text-transform: uppercase;
+        }
+
+        /* Typography */
+        .popup-right h2 {
+          margin: 0 0 8px;
+          font-size: 24px;
+          font-weight: 700;
+          color: #333;
+        }
+
+        .popup-right p {
+          margin: 0 0 20px;
+          color: #666;
+          font-size: 14px;
+        }
+
+        /* Tabs */
+        .tabs {
+          display: flex;
+          gap: 8px;
+          margin-bottom: 20px;
+        }
+
+        .tab {
+          flex: 1;
+          padding: 10px 5px;
+          border: 1px solid #ddd;
+          background: #f9f9f9;
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          border-radius: 4px;
+          white-space: nowrap;
+        }
+
+        .tab:hover {
+          border-color: #000;
+        }
+
+        .tab.active {
+          background: #000;
+          color: #fff;
+          border-color: #000;
+        }
+
+        /* Form Styles */
+        .form-group {
+          margin-bottom: 15px;
+        }
+
+        .form-group input {
+          width: 100%;
+          padding: 12px 15px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+          transition: border 0.3s;
+          outline: none;
+        }
+
+        .form-group input:focus {
+          border-color: #000;
+          box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn {
+          width: 100%;
+          padding: 14px;
+          background: #000;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          font-size: 15px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.3s, transform 0.1s;
+        }
+
+        .submit-btn:hover {
+          background: #333;
+        }
+
+        .submit-btn:active {
+          transform: scale(0.98);
+        }
+
+        /* =========================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================= */
+        @media (max-width: 768px) {
+          .overlay {
+            display: block; /* Allows native scrolling */
+            padding: 0;
+            overflow-y: scroll;
+          }
+
+          /* When the popup is active (overriding inline JS display: flex) */
+          .overlay[style*="display: flex"] {
+            display: block !important;
+          }
+
+          .popup {
+            flex-direction: column;
+            max-width: 100%;
+            border-radius: 0;
+            min-height: 100vh; /* Fills screen on mobile */
+            margin: 0;
+          }
+
+          .close-btn {
+            top: 15px;
+            right: 15px;
+            background: #fff; /* Ensure visibility on top of image */
+            color: #000;
+          }
+
+          /* Image Banner on Mobile */
+          .popup-left {
+            width: 100%;
+            height: 180px; /* Fixed height banner */
+            flex-shrink: 0;
+          }
+
+          .popup-right {
+            width: 100%;
+            padding: 25px 20px 40px; /* More bottom padding for scroll space */
+            flex-shrink: 0;
+          }
+
+          /* Adjust typography for small screens */
+          .popup-right h2 {
+            font-size: 22px;
+          }
+
+          .offer-banner {
+            flex-direction: row;
+            font-size: 12px;
+          }
+
+          .tabs {
+            flex-wrap: nowrap; /* Keep on one line if possible */
+          }
+
+          .tab {
+            font-size: 12px;
+            padding: 10px 4px;
+          }
+        }
+
+        /* Very Small Screens (e.g. iPhone SE) */
+        @media (max-width: 350px) {
+          .offer-banner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+          }
+
+          .popup-left {
+            height: 140px;
+          }
+        }
+        /* =========================================
+   TABLET (1024px and below)
+========================================= */
+        @media (max-width: 1024px) {
+          .popup {
+            max-width: 700px;
+          }
+
+          .popup-right {
+            padding: 30px;
+          }
+
+          .popup-right h2 {
+            font-size: 22px;
+          }
+
+          .offer-banner {
+            font-size: 12px;
+          }
+        }
+
+        /* =========================================
+   MOBILE (768px and below)
+========================================= */
+        @media (max-width: 768px) {
+          .overlay {
+            padding: 15px;
+          }
+
+          .popup {
+            flex-direction: column;
+            width: 100%;
+            max-width: 420px; /* smaller popup */
+            border-radius: 12px;
+          }
+
+          .popup-left {
+            width: 100%;
+            height: 150px; /* reduced image height */
+          }
+
+          .popup-right {
+            width: 100%;
+            padding: 20px;
+          }
+
+          .popup-right h2 {
+            font-size: 20px;
+          }
+
+          .popup-right p {
+            font-size: 13px;
+          }
+
+          .offer-banner {
+            font-size: 11px;
+            padding: 8px 10px;
+          }
+
+          .tab {
+            font-size: 12px;
+            padding: 8px 4px;
+          }
+
+          .form-group input {
+            padding: 10px 12px;
+            font-size: 13px;
+          }
+
+          .submit-btn {
+            padding: 12px;
+            font-size: 14px;
+          }
+        }
+
+        /* =========================================
+   SMALL MOBILE (480px and below)
+========================================= */
+        @media (max-width: 480px) {
+          .popup {
+            max-width: 95%;
+          }
+
+          .popup-left {
+            height: 120px; /* even smaller image */
+          }
+
+          .popup-right {
+            padding: 18px;
+          }
+
+          .popup-right h2 {
+            font-size: 18px;
+          }
+
+          .tabs {
+            gap: 5px;
+          }
+
+          .tab {
+            font-size: 11px;
+          }
+        }
+      </style>
+
+      <script>
+        let popup;
+
+        window.addEventListener("DOMContentLoaded", () => {
+          popup = document.getElementById("popupOverlay");
+          const isClosed = sessionStorage.getItem("popupClosed");
+
+          if (!isClosed) {
+            // Use flex for desktop centering logic, CSS media queries handle mobile block display
+            popup.style.display = "flex";
+          }
+        });
+
+        function closePopup() {
+          sessionStorage.setItem("popupClosed", "true");
+          popup.style.display = "none";
+        }
+
+        function openPopup() {
+          sessionStorage.removeItem("popupClosed");
+          popup.style.display = "flex";
+        }
+
+        function selectService(service, element) {
+          document.getElementById("serviceInput").value = service;
+          document
+            .querySelectorAll(".tab")
+            .forEach((tab) => tab.classList.remove("active"));
+          element.classList.add("active");
+        }
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          closePopup();
+          alert("Form submitted successfully");
+        }
+      </script>
+    </section>
+    ss
     <!-- WhatsApp Floating Button -->
     <a
       href="https://wa.me/+917891070107?text=Hello%20I%20would%20like%20to%20book%20an%20appointment"
@@ -1761,276 +2246,6 @@
                   </div>
                 </div>
               </div>
-            </section>
-
-            <!-- Tattoo Popup Section  -->
-            <section id="tattoo-popup-section">
-              <!-- Overlay -->
-              <div class="overlay" id="popupOverlay">
-                <div class="popup">
-                  <div class="close-btn" onclick="closePopup()">✕</div>
-
-                  <!-- Left Image -->
-                  <div class="popup-left">
-                    <img
-                      src="/wp-content/uploads/2018/05/port-4-img-12.jpg"
-                      alt="Tattoo Studio"
-                    />
-                  </div>
-
-                  <!-- Right Content -->
-                  <div class="popup-right">
-                    <div class="offer-banner">
-                      <span class="offer-badge">LIMITED</span>
-                      <span class="offer-text"
-                        >Get <strong>30% OFF</strong> on your first
-                        session</span
-                      >
-                    </div>
-
-                    <h2>Book Your Appointment</h2>
-                    <p>Select a service and fill in your details</p>
-
-                    <!-- Tabs -->
-                    <div class="tabs">
-                      <button
-                        class="tab active"
-                        onclick="selectService('Tattoo', this)"
-                      >
-                        Tattoo
-                      </button>
-                      <button
-                        class="tab"
-                        onclick="selectService('Piercing', this)"
-                      >
-                        Piercing
-                      </button>
-                      <button
-                        class="tab"
-                        onclick="selectService('Tattoo Training', this)"
-                      >
-                        Tattoo Training
-                      </button>
-                    </div>
-
-                    <!-- Form -->
-                    <form onsubmit="handleSubmit(event)">
-                      <div class="form-group">
-                        <input type="text" placeholder="Your Name" required />
-                      </div>
-
-                      <div class="form-group">
-                        <input type="tel" placeholder="Phone Number" required />
-                      </div>
-
-                      <input type="hidden" id="serviceInput" value="Tattoo" />
-
-                      <button class="submit-btn">Submit</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-              <style>
-                .offer-banner {
-                  width: 90%;
-                  padding: 12px 14px;
-                  margin-bottom: 20px;
-                  margin-top: 20px;
-
-                  border: 1px solid #000;
-                  background: #000;
-                  color: #fff;
-
-                  display: flex;
-                  align-items: center;
-                  gap: 10px;
-
-                  font-size: 14px;
-                }
-
-                .offer-badge {
-                  background: #fff;
-                  color: #000;
-                  padding: 4px 8px;
-                  font-size: 11px;
-                  font-weight: bold;
-                  letter-spacing: 0.5px;
-                }
-
-                .offer-text strong {
-                  font-weight: 700;
-                }
-
-                /* Overlay */
-                .overlay {
-                  position: fixed;
-                  top: 0;
-                  left: 0;
-                  width: 100vw;
-                  height: 100vh;
-
-                  background: rgba(0, 0, 0, 0.6);
-
-                  display: none; /* ✅ HIDDEN BY DEFAULT */
-                  align-items: center;
-                  justify-content: center;
-
-                  z-index: 9999;
-                }
-
-                /* Popup */
-                .popup {
-                  width: 90%;
-                  max-width: 900px;
-                  background: #fff;
-                  display: flex;
-                  border-radius: 10px;
-                  overflow: hidden;
-                  position: relative;
-                }
-
-                /* Close button */
-                .close-btn {
-                  position: absolute;
-                  top: 10px;
-                  right: 14px;
-                  font-size: 22px;
-                  cursor: pointer;
-                  color: #000;
-                }
-
-                /* Left Image */
-                .popup-left {
-                  width: 50%;
-                  overflow: hidden;
-                }
-
-                .popup-left img {
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                }
-
-                /* Right Content */
-                .popup-right {
-                  width: 50%;
-                  padding: 30px;
-                }
-
-                .popup-right h2 {
-                  margin: 0 0 10px;
-                  font-size: 26px;
-                }
-
-                .popup-right p {
-                  margin-bottom: 20px;
-                  color: #555;
-                  font-size: 14px;
-                }
-
-                /* Tabs */
-                .tabs {
-                  display: flex;
-                  gap: 10px;
-                  margin-bottom: 20px;
-                }
-
-                .tab {
-                  flex: 1;
-                  padding: 10px;
-                  border: 1px solid #000;
-                  background: #fff;
-                  cursor: pointer;
-                  font-size: 14px;
-                }
-
-                .tab.active {
-                  background: #000;
-                  color: #fff;
-                }
-
-                /* Form */
-                .form-group {
-                  margin-bottom: 15px;
-                }
-
-                .form-group input {
-                  width: 100%;
-                  padding: 12px;
-                  border: 1px solid #000;
-                  font-size: 14px;
-                }
-
-                .submit-btn {
-                  width: 100%;
-                  padding: 12px;
-                  background: #000;
-                  color: #fff;
-                  border: none;
-                  cursor: pointer;
-                }
-
-                /* Responsive */
-                @media (max-width: 768px) {
-                  .popup {
-                    flex-direction: column;
-                  }
-
-                  .popup-left,
-                  .popup-right {
-                    width: 100%;
-                  }
-
-                  .popup-left {
-                    height: 200px;
-                  }
-                }
-              </style>
-
-              <script>
-                let popup;
-
-                window.addEventListener("DOMContentLoaded", () => {
-                  popup = document.getElementById("popupOverlay");
-
-                  const isClosed = sessionStorage.getItem("popupClosed");
-
-                  // Show popup ONLY if not closed in this session
-                  if (!isClosed) {
-                    popup.style.display = "flex";
-                  }
-                });
-
-                function closePopup() {
-                  sessionStorage.setItem("popupClosed", "true");
-                  popup.style.display = "none";
-                }
-
-                function openPopup() {
-                  sessionStorage.removeItem("popupClosed");
-                  popup.style.display = "flex";
-                }
-
-                function selectService(service, element) {
-                  document.getElementById("serviceInput").value = service;
-
-                  document.querySelectorAll(".tab").forEach((tab) => {
-                    tab.classList.remove("active");
-                  });
-
-                  element.classList.add("active");
-                }
-
-                function handleSubmit(e) {
-                  e.preventDefault();
-
-                  sessionStorage.setItem("popupClosed", "true");
-                  popup.style.display = "none";
-
-                  alert("Form submitted successfully");
-                }
-              </script>
             </section>
 
             <!-- Popup Overlay -->
