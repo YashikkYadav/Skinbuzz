@@ -730,7 +730,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 	</div>
 </div>
 <div id="text-5" class="widget mkdf-sidearea widget_text">	
-			<div class="textwidget"><p><a href="https://www.google.com/maps/search/?api=1&query=23.0874996,72.6840286" target="_blank" rel="noopener">Skinbuzz Tattoos Ahmedabad,<br />Shop No. 104, First Floor, Naroda Business Hub,<br />Naroda - Dehgam Rd, GIDC Naroda,<br />Ahmedabad, Gujarat 382330</a><br />
+			<div class="textwidget"><p><a href="https://www.google.com/maps/search/?api=1&query=23.0874996,72.6840286" target="_blank" rel="noopener">Skinbuzz Tattoos Ahmedabad,<br />Shop No. 104, First Floor, Above Babadeep Singh Restaurant,<br />Naroda Business Hub, Naroda - Dehgam Rd,<br />GIDC Naroda, Ahmedabad, Gujarat 382330</a><br />
 Mobile: <a href="">+91 7891070107</a><br />
  
 E-mail: <a href=""><span class="__cf_email__" data-cfemail="a1c8cfc7cee1c4d9c0ccd1cdc48fc2cecc">skinbuzztattooz07@gmail.com</span></a></p>
@@ -2127,22 +2127,25 @@ Not just tattoos — timeless stories
 .footer-container {
   max-width: 1200px;
   margin: auto;
+  padding-left: 100px;
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 40px;
 }
 
 .footer-col {
   font-size: 14px;
-  margin-left: 100px;
   line-height: 1.7;
   position: relative;
   z-index: 11;
+  min-width: 0;
 }
 
 .footer-logo {
   width: 140px;
-  margin-bottom: 15px;
+  display: block;
+  margin: 0 0 8px;
 }
 
 .footer-title {
@@ -2194,7 +2197,7 @@ Not just tattoos — timeless stories
 }
 
 .footer-address {
-  margin: 10px 0;
+  margin: 0 0 10px;
   color: #ccc;
 }
 
@@ -2247,9 +2250,26 @@ Not just tattoos — timeless stories
 }
 
 
+  @media (max-width: 1100px) {
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+      padding-left: 40px;
+    }
+  }
+
   @media (max-width: 768px) {
+    .footer-container {
+      padding-left: 20px;
+    }
     .footer-col {
       margin-left: 0 !important;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      padding-left: 0;
     }
   }
 
@@ -2269,9 +2289,9 @@ Not just tattoos — timeless stories
       <p class="footer-address">
         <a href="https://www.google.com/maps/search/?api=1&query=23.0874996,72.6840286" target="_blank" rel="noopener">
           Skinbuzz Tattoos Ahmedabad,<br />
-          Shop No. 104, First Floor, Naroda Business Hub,<br />
-          Naroda - Dehgam Rd, GIDC Naroda,<br />
-          Ahmedabad, Gujarat 382330
+          Shop No. 104, First Floor, Above Babadeep Singh Restaurant,<br />
+          Naroda Business Hub, Naroda - Dehgam Rd,<br />
+          GIDC Naroda, Ahmedabad, Gujarat 382330
         </a>
       </p>
       <p class="footer-contact">
